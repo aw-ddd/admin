@@ -38,7 +38,8 @@ public class UserServiceImpl implements UserService {
             if (user1.getPassword().equals(user.getPassword())) {
                 //密码相同登录成功(进行JWT加密)
                 Calendar instance = Calendar.getInstance();
-                instance.add(Calendar.SECOND,21600);
+//                instance.add(Calendar.SECOND,21600);
+                instance.add(Calendar.SECOND,30);
                 String token = JWT.create().withClaim("username", user1.getUsername()).withExpiresAt(instance.getTime()).sign(Algorithm.HMAC256("@#qwer"));
                 return ResultTool.success(token);
             } else {
