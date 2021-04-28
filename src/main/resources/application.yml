@@ -1,13 +1,36 @@
+spring:
+  profiles:
+    # 当前环境
+    active: dev
+mybatis-plus:
+  mapper-locations: classpath:/com/dwj/mapper/**.xml
+---
+#开发环境配置
 server:
   port: 8999
 spring:
+  profiles: dev
+  datasource:
+    url: jdbc:mysql://localhost:3306/admin?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=GMT%2B8
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+logging:
+  level:
+    com.dwj.mapper: debug
+  config: classpath:log.xml
+  path: D:/admin/log
+
+---
+#生产环境配置
+spring:
+  profiles: pro
   datasource:
     url: jdbc:mysql://115.159.117.170:3306/admin?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=GMT%2B8
     username: root
     password: ding1998713
     driver-class-name: com.mysql.cj.jdbc.Driver
-mybatis-plus:
-  mapper-locations: classpath:/com/dwj/mapper/**.xml
 logging:
-  level:
-    com.dwj.mapper: debug
+  config: classpath:log.xml
+  path: file:/root/docker/tomcat/log
+
